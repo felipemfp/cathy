@@ -1,2 +1,2 @@
 # cathy
-Catherine
+Catherine lets you organize your financial life

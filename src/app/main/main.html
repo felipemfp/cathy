@@ -19,34 +19,38 @@
   <md-content flex="30">
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Sign Up">
-        <md-content layout="column" class="md-padding">
-          <md-input-container>
-            <label>Name</label>
-            <input type="text">
-          </md-input-container>
-          <md-input-container>
-            <label>Username</label>
-            <input type="text">
-          </md-input-container>
-          <md-input-container>
-            <label>Password</label>
-            <input type="password">
-          </md-input-container>
-          <md-button class="md-raised md-primary">Sign Up</md-button>
+        <md-content class="md-padding">
+          <form ng-submit="main.signUp()" layout="column">
+            <md-input-container>
+              <label>Name</label>
+              <input type="text">
+            </md-input-container>
+            <md-input-container>
+              <label>Username</label>
+              <input type="text">
+            </md-input-container>
+            <md-input-container>
+              <label>Password</label>
+              <input type="password">
+            </md-input-container>
+            <md-button type="submit" class="md-raised md-primary">Sign Up</md-button>
+          </form>
         </md-content>
       </md-tab>
       <md-tab label="Sign In">
-        <md-content layout="column" class="md-padding">
-          <md-input-container>
-            <label>Username</label>
-            <input type="text">
-          </md-input-container>
-          <md-input-container>
-            <label>Password</label>
-            <input type="password">
-          </md-input-container>
-          <md-button class="md-raised md-primary">Sign In</md-button>
-          <md-button>Problems?</md-button>
+        <md-content class="md-padding">
+          <form ng-submit="main.signIn()" layout="column">
+            <md-input-container>
+              <label>Username</label>
+              <input type="text">
+            </md-input-container>
+            <md-input-container>
+              <label>Password</label>
+              <input type="password">
+            </md-input-container>
+            <md-button type="submit" class="md-raised md-primary">Sign In</md-button>
+            <md-button>Problems?</md-button>
+          </form>
         </md-content>
       </md-tab>
     </md-tabs>

@@ -6,19 +6,19 @@
     .factory('authenticationService', authenticationService);
 
   /** @ngInject */
-  function authenticationService($http, $cookieStore, $rootScope) {
-    var apiHost = 'https://my-cathy.herokuapp.com';
+  function authenticationService($http, $log, $cookieStore, $rootScope) {
+    var apiHost = 'http://my-cathy.herokuapp.com';
 
     var service = {
       login: login,
       setUser: setUser,
       clearUser: clearUser
-    }
+    };
 
     return service;
 
     function login(login, password) {
-      return $http.post(apiHost + '/api/login', {
+      return $http.post(apiHost + '/api/login/', {
         login: login,
         password: password
       }).then(loginComplete).catch(loginFailed);
@@ -29,7 +29,7 @@
         return user;
       }
 
-      function loginFailed(response) {
+      function loginFailed(error) {
         $log.error('XHR Failed for login.\n' + angular.toJson(error.data, true));
       }
 

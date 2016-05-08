@@ -23,15 +23,15 @@
           <form ng-submit="main.signUp()" layout="column">
             <md-input-container>
               <label>Name</label>
-              <input type="text">
+              <input ng-model="main.register.name" type="text">
             </md-input-container>
             <md-input-container>
               <label>Username</label>
-              <input type="text">
+              <input ng-model="main.register.login" type="text">
             </md-input-container>
             <md-input-container>
               <label>Password</label>
-              <input type="password">
+              <input ng-model="main.register.password" type="password">
             </md-input-container>
             <md-button type="submit" class="md-raised md-primary">Sign Up</md-button>
           </form>

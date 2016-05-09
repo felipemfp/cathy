@@ -42,11 +42,11 @@
           <form ng-submit="main.signIn()" layout="column">
             <md-input-container>
               <label>Username</label>
-              <input type="text">
+              <input ng-model="main.login" type="text">
             </md-input-container>
             <md-input-container>
               <label>Password</label>
-              <input type="password">
+              <input ng-model="main.password" type="password">
             </md-input-container>
             <md-button type="submit" class="md-raised md-primary">Sign In</md-button>
             <md-button>Problems?</md-button>

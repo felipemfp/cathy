@@ -2,6 +2,8 @@
   'use strict';
 
   angular
-    .module('cathy', ['ngCookies', 'ngRoute', 'ngMaterial', 'toastr']);
+    .module('cathy', ['ngCookies', 'ngRoute', 'ngMaterial',
+      'ngMessages', 'angular-loading-bar', 'ngAnimate'
+    ]);
 
 })();

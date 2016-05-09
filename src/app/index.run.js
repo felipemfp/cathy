@@ -6,8 +6,8 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($log, $rootScope, $location, $cookieStore, $http) {
-    $rootScope.globals = $cookieStore.get('globals') || {};
+  function runBlock($log, $rootScope, $location, $cookies, $http) {
+    $rootScope.globals = $cookies.get('globals') || {};
     if ($rootScope.globals.currentUser) {
       $http.defaults.headers.common['AuthKey'] = $rootScope.globals.currentUser.authKey;
     }

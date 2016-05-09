@@ -6,8 +6,8 @@
     .factory('authenticationService', authenticationService);
 
   /** @ngInject */
-  function authenticationService($http, $log, $cookieStore, $rootScope) {
-    var apiHost = 'http://my-cathy.herokuapp.com';
+  function authenticationService($http, $log, $cookies, cathyAPIBase, $rootScope) {
+    var apiHost = cathyAPIBase.apiHost;
 
     var service = {
       login: login,
@@ -44,12 +44,12 @@
         }
       };
       $http.defaults.headers.common['AuthKey'] = authKey;
-      $cookieStore.put('globals', $rootScope.globals);
+      $cookies.put('globals', $rootScope.globals);
     }
 
     function clearUser() {
       $rootScope.globals = {};
-      $cookieStore.remove('globals');
+      $cookies.remove('globals');
       $http.defaults.headers.common.AuthKey = '';
     }
   }

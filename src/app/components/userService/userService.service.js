@@ -6,11 +6,11 @@
     .factory('userService', userService);
 
   /** @ngInject */
-  function userService($http, $log, authenticationService) {
-    var apiHost = 'http://my-cathy.herokuapp.com';
+  function userService($http, $log, cathyAPIBase, authenticationService) {
+    var apiHost = cathyAPIBase.apiHost;
 
     var service = {
-      register: register,
+      register: register
     };
 
     return service;

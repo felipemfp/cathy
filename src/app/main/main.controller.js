@@ -17,13 +17,14 @@
       var login = vm.register.login;
       var password = vm.register.password;
       userService.register(name, login, password).then(function(fetchedData) {
-        $log.log(fetchedData.name + ' registered.');
-        $mdToast.show(
-          $mdToast.simple()
-          .textContent(fetchedData.name + ' registered.')
-          .hideDelay(3000)
-        );
-        $location.path('/dashboard');
+        if (fetchedData) {
+          $mdToast.show(
+            $mdToast.simple()
+            .textContent(fetchedData.name + ' registered.')
+            .hideDelay(3000)
+          );
+          $location.path('/dashboard');
+        } else {}
       });
     }
 
@@ -31,13 +32,14 @@
       var login = vm.login;
       var password = vm.password;
       authenticationService.login(login, password).then(function(fetchedData) {
-        $log.log(fetchedData.name + ' logged.');
-        $mdToast.show(
-          $mdToast.simple()
-          .textContent(fetchedData.name + ' logged.')
-          .hideDelay(3000)
-        );
-        $location.path('/dashboard');
+        if (fetchedData) {
+          $mdToast.show(
+            $mdToast.simple()
+            .textContent(fetchedData.name + ' logged.')
+            .hideDelay(3000)
+          );
+          $location.path('/dashboard');
+        } else {}
       });
     }
 

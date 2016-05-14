@@ -6,8 +6,8 @@
     .factory('authenticationService', authenticationService);
 
   /** @ngInject */
-  function authenticationService($http, $log, $cookies, cathyAPIBase, $rootScope) {
-    var apiHost = cathyAPIBase.apiHost;
+  function authenticationService($http, $log, $cookies, catherineAPI, $rootScope) {
+    var apiHost = catherineAPI.apiHost;
 
     var service = {
       login: login,

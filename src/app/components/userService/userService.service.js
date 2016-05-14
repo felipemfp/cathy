@@ -6,8 +6,8 @@
     .factory('userService', userService);
 
   /** @ngInject */
-  function userService($http, $log, cathyAPIBase, authenticationService) {
-    var apiHost = cathyAPIBase.apiHost;
+  function userService($http, $log, catherineAPI, authenticationService) {
+    var apiHost = catherineAPI.apiHost;
 
     var service = {
       register: register

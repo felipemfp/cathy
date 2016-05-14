@@ -3,11 +3,11 @@
 
   angular
     .module('cathy')
-    .factory('cathyAPIBase', cathyAPIBase);
+    .factory('catherineAPI', catherineAPI);
 
   /** @ngInject */
-  function cathyAPIBase() {
-    var apiHost = 'http://my-cathy.herokuapp.com';
+  function catherineAPI() {
+    var apiHost = 'http://catherine-api.herokuapp.com';
 
     var service = {
       apiHost: apiHost

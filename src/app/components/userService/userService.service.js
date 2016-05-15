@@ -23,7 +23,6 @@
       }).then(registerComplete).catch(registerFailed);
 
       function registerComplete(response) {
-        var user = response.data;
         authenticationService.login(username, password, callback);
       }
 

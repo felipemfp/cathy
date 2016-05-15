@@ -37,16 +37,16 @@
     }
 
     function setToken(token) {
-      var data = parseJwt(token);
+      var payload = parseJwt(token);
       $rootScope.globals = {
         currentUser: {
-          name: data.name,
-          username: data.username,
+          name: payload.name,
+          username: payload.username,
           token: token
         }
       };
       $http.defaults.headers.common.Authorization = 'Bearer ' + token;
-      $cookies.put('globals', $rootScope.globals);
+      $cookies.putObject('globals', $rootScope.globals);
     }
 
     function clearToken() {
@@ -58,7 +58,7 @@
     function parseJwt(token) {
       var base64Url = token.split('.')[1];
       var base64 = base64Url.replace('-', '+').replace('_', '/');
-      return JSON.parse($window.atob(base64));
+      return angular.fromJson($window.atob(base64));
     }
   }
 })();

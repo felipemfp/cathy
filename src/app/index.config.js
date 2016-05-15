@@ -11,8 +11,8 @@
     $logProvider.debugEnabled(true);
 
     $mdThemingProvider.theme('default')
-      .primaryPalette('indigo')
-      .accentPalette('pink');
+      .primaryPalette('purple')
+      .accentPalette('green');
 
     cfpLoadingBarProvider.includeSpinner = false;
   }

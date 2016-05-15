@@ -15,21 +15,21 @@
 
     return service;
 
-    function register(name, login, password) {
+    function register(name, username, password, callback) {
       return $http.post(apiHost + '/api/users/', {
         name: name,
-        login: login,
+        username: username,
         password: password
       }).then(registerComplete).catch(registerFailed);
 
       function registerComplete(response) {
         var user = response.data;
-        authenticationService.setUser(user.login, user.name, user.auth_key);
-        return user;
+        authenticationService.login(username, password, callback);
       }
 
       function registerFailed(error) {
         $log.error('XHR Failed for register.\n' + angular.toJson(error.data, true));
+        callback(false);
       }
     }
   }

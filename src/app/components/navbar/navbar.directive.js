@@ -24,7 +24,7 @@
       vm.signOut = signOut;
 
       function signOut() {
-        authenticationService.clearUser();
+        authenticationService.clearToken();
         $location.path('/');
       }
     }

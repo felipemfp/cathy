@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($log, $mdToast, $location, userService, authenticationService) {
+  function MainController($log, $mdToast, $location, $rootScope, userService, authenticationService) {
     var vm = this;
 
     vm.signUp = signUp;
@@ -14,32 +14,46 @@
 
     function signUp() {
       var name = vm.register.name;
-      var login = vm.register.login;
+      var username = vm.register.username;
       var password = vm.register.password;
-      userService.register(name, login, password).then(function(fetchedData) {
-        if (fetchedData) {
+      userService.register(name, username, password, function(response) {
+        if (response === true) {
           $mdToast.show(
             $mdToast.simple()
-            .textContent(fetchedData.name + ' registered.')
+            .textContent($rootScope.globals.currentUser.name + ' registered and logged.')
             .hideDelay(3000)
           );
           $location.path('/dashboard');
-        } else {}
+        }
+        else {
+          $mdToast.show(
+            $mdToast.simple()
+            .textContent('Something is wrong!')
+            .hideDelay(3000)
+          );
+        }
       });
     }
 
     function signIn() {
-      var login = vm.login;
+      var username = vm.username;
       var password = vm.password;
-      authenticationService.login(login, password).then(function(fetchedData) {
-        if (fetchedData) {
+      authenticationService.login(username, password, function(response) {
+        if (response === true) {
           $mdToast.show(
             $mdToast.simple()
-            .textContent(fetchedData.name + ' logged.')
+            .textContent($rootScope.globals.currentUser.name + ' logged.')
             .hideDelay(3000)
           );
           $location.path('/dashboard');
-        } else {}
+        }
+        else {
+          $mdToast.show(
+            $mdToast.simple()
+            .textContent('Username and password does not match.')
+            .hideDelay(3000)
+          );
+        }
       });
     }
 

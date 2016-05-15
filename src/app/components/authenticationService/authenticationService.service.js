@@ -6,51 +6,59 @@
     .factory('authenticationService', authenticationService);
 
   /** @ngInject */
-  function authenticationService($http, $log, $cookies, catherineAPI, $rootScope) {
+  function authenticationService($http, $log, $cookies, $rootScope, $window, catherineAPI) {
     var apiHost = catherineAPI.apiHost;
 
     var service = {
       login: login,
-      setUser: setUser,
-      clearUser: clearUser
+      setToken: setToken,
+      clearToken: clearToken,
+      parseJwt: parseJwt
     };
 
     return service;
 
-    function login(login, password) {
+    function login(username, password, callback) {
       return $http.post(apiHost + '/api/login/', {
-        login: login,
+        username: username,
         password: password
       }).then(loginComplete).catch(loginFailed);
 
       function loginComplete(response) {
-        var user = response.data;
-        setUser(user.login, user.name, user.auth_key);
-        return user;
+        var token = response.data.token;
+        setToken(token);
+        callback(true);
       }
 
       function loginFailed(error) {
         $log.error('XHR Failed for login.\n' + angular.toJson(error.data, true));
+        callback(false);
       }
-
     }
 
-    function setUser(login, name, authKey) {
+    function setToken(token) {
+      var data = parseJwt(token);
       $rootScope.globals = {
         currentUser: {
-          login: login,
-          name: name,
-          authKey: authKey
+          name: data.name,
+          username: data.username,
+          token: token
         }
       };
-      $http.defaults.headers.common['AuthKey'] = authKey;
+      $http.defaults.headers.common.Authorization = 'Bearer ' + token;
       $cookies.put('globals', $rootScope.globals);
     }
 
-    function clearUser() {
+    function clearToken() {
       $rootScope.globals = {};
+      $http.defaults.headers.common.Authorization = '';
       $cookies.remove('globals');
-      $http.defaults.headers.common.AuthKey = '';
+    }
+
+    function parseJwt(token) {
+      var base64Url = token.split('.')[1];
+      var base64 = base64Url.replace('-', '+').replace('_', '/');
+      return JSON.parse($window.atob(base64));
     }
   }
 })();

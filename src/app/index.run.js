@@ -8,8 +8,9 @@
   /** @ngInject */
   function runBlock($log, $rootScope, $location, $cookies, $http) {
     $rootScope.globals = $cookies.get('globals') || {};
+
     if ($rootScope.globals.currentUser) {
-      $http.defaults.headers.common['AuthKey'] = $rootScope.globals.currentUser.authKey;
+      $http.defaults.headers.common.Authorization = 'Bearer ' + $rootScope.globals.currentUser.token;
     }
 
     $rootScope.$on('$locationChangeStart', function(event, next, current) {

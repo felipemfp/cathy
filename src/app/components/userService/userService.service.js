@@ -23,7 +23,12 @@
       }).then(registerComplete).catch(registerFailed);
 
       function registerComplete(response) {
-        authenticationService.login(username, password, callback);
+        if (response.status == 200) {
+          authenticationService.login(username, password, callback);
+        }
+        else {
+          callback(false);
+        }
       }
 
       function registerFailed(error) {

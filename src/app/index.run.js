@@ -25,6 +25,9 @@
       if (restrictedPage && !loggedIn) {
         $location.path('/');
       }
+      else if ($location.path() == '/' && loggedIn) {
+        $location.path('/dashboard');
+      }
     });
 
     $log.debug('runBlock end');

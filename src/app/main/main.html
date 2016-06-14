@@ -20,18 +20,18 @@
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Sign Up">
         <md-content class="md-padding">
-          <form ng-submit="vm.signUp()" layout="column">
+          <form ng-submit="ctrl.signUp()" layout="column">
             <md-input-container>
               <label>Name</label>
-              <input ng-model="vm.register.name" type="text">
+              <input ng-model="ctrl.register.name" type="text">
             </md-input-container>
             <md-input-container>
               <label>Username</label>
-              <input ng-model="vm.register.username" type="text">
+              <input ng-model="ctrl.register.username" type="text">
             </md-input-container>
             <md-input-container>
               <label>Password</label>
-              <input ng-model="vm.register.password" type="password">
+              <input ng-model="ctrl.register.password" type="password">
             </md-input-container>
             <md-button type="submit" class="md-raised md-primary">Sign Up</md-button>
           </form>
@@ -39,14 +39,14 @@
       </md-tab>
       <md-tab label="Sign In">
         <md-content class="md-padding">
-          <form ng-submit="vm.signIn()" layout="column">
+          <form ng-submit="ctrl.signIn()" layout="column">
             <md-input-container>
               <label>Username</label>
-              <input ng-model="vm.username" type="text">
+              <input ng-model="ctrl.username" type="text">
             </md-input-container>
             <md-input-container>
               <label>Password</label>
-              <input ng-model="vm.password" type="password">
+              <input ng-model="ctrl.password" type="password">
             </md-input-container>
             <md-button type="submit" class="md-raised md-primary">Sign In</md-button>
             <md-button>Problems?</md-button>

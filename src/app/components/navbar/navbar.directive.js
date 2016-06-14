@@ -11,7 +11,7 @@
       restrict: 'E',
       templateUrl: 'app/components/navbar/navbar.html',
       controller: NavbarController,
-      controllerAs: 'vm',
+      controllerAs: 'navbar',
       bindToController: true
     };
 
@@ -19,9 +19,9 @@
 
     /** @ngInject */
     function NavbarController($location, authenticationService) {
-      var vm = this;
+      var navbar = this;
 
-      vm.signOut = signOut;
+      navbar.signOut = signOut;
 
       function signOut() {
         authenticationService.clearToken();

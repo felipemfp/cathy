@@ -12,7 +12,6 @@
     if ($rootScope.globals.currentUser) {
       var token = $rootScope.globals.currentUser.token;
       var payload = authenticationService.parseJwt(token);
-      $log.log((Math.round(new Date().getTime() / 1000) <= payload.exp), angular.toJson(payload))
       if (Math.round(new Date().getTime() / 1000) <= payload.exp) {
         $http.defaults.headers.common.Authorization = 'Bearer ' + token;
       }

@@ -10,12 +10,12 @@
       .when('/', {
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
-        controllerAs: 'vm'
+        controllerAs: 'ctrl'
       })
       .when('/dashboard', {
         templateUrl: 'app/dashboard/dashboard.html',
         controller: 'DashboardController',
-        controllerAs: 'vm'
+        controllerAs: 'ctrl'
       })
       .otherwise({
         redirectTo: '/'

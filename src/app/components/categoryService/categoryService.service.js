@@ -10,80 +10,87 @@
     var apiHost = catherineAPI.apiHost;
 
     var service = {
-      add: add,
-      update: update,
-      remove: remove,
-      get: get
+      addCategory: add,
+      updateCategory: update,
+      removeCategory: remove,
+      getCategories: get
     };
 
     return service;
 
-    function add(name, icon_id, callback) {
-      return $http.post(apiHost + '/api/' + $rootScope.globals.currentUser.username + '/categories/', {
+    function add(name, icon) {
+      if (!icon) {
+        icon = 'label';
+      }
+
+      return $http.post(apiHost + '/api/categories/' + $rootScope.globals.currentUser.username + '/', {
         name: name,
-        icon_id: icon_id
+        icon: icon
       }).then(addComplete).catch(addFailed);
 
       function addComplete(response) {
-        callback(response.data);
+        $log.info(response.data);
+        return response.data;
       }
 
       function addFailed(error) {
         $log.error('XHR Failed for add.\n' + angular.toJson(error.data, true));
-        callback(error);
       }
     }
 
-    function get(id, callback) {
+    function get(id) {
       if (id) {
-        return $http.get(apiHost + '/api/' + $rootScope.globals.currentUser.username + '/categories/' + id)
+        return $http.get(apiHost + '/api/categories/' + $rootScope.globals.currentUser.username + '/' + id + '/')
           .then(getComplete).catch(getFailed);
       } else {
-        return $http.get(apiHost + '/api/' + $rootScope.globals.currentUser.username + '/categories/')
+        return $http.get(apiHost + '/api/categories/' + $rootScope.globals.currentUser.username + '/')
           .then(getComplete).catch(getFailed);
       }
 
       function getComplete(response) {
-        callback(response.data);
+        $log.info(response.data);
+        return response.data;
       }
 
       function getFailed(error) {
         $log.error('XHR Failed for get.\n' + angular.toJson(error.data, true));
-        callback(error);
       }
     }
 
-    function remove(id, callback) {
-      return $http.delete(apiHost + '/api/' + $rootScope.globals.currentUser.username + '/categories/' + id)
+    function remove(id) {
+      return $http.delete(apiHost + '/api/categories/' + $rootScope.globals.currentUser.username + '/' + id + '/')
         .then(removeComplete).catch(removeFailed);
 
       function removeComplete(response) {
         if (response.status == 200) {
-          callback(true);
+          return true;
         }
         else {
-          callback(false);
+          return false;
         }
       }
 
       function removeFailed(error) {
         $log.error('XHR Failed for remove.\n' + angular.toJson(error.data, true));
-        callback(error);
       }
     }
 
-    function update(id, category, callback) {
-      return $http.put(apiHost + '/api/' + $rootScope.globals.currentUser.username + '/categories/' + id,
+    function update(id, category) {
+      if (!category.icon) {
+        category.icon = 'label';
+      }
+
+      return $http.put(apiHost + '/api/categories/' + $rootScope.globals.currentUser.username + '/' + id + '/',
           category)
         .then(updateComplete).catch(updateFailed);
 
       function updateComplete(response) {
-        callback(response.data);
+        return response.data;
+        $log.info(response.data);
       }
 
       function updateFailed(error) {
         $log.error('XHR Failed for update.\n' + angular.toJson(error.data, true));
-        callback(error);
       }
     }
   }

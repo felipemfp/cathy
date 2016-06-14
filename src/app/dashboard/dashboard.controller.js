@@ -6,14 +6,34 @@
     .controller('DashboardController', DashboardController);
 
   /** @ngInject */
-  function DashboardController($location, authenticationService) {
+  function DashboardController($log, categoryService) {
     var vm = this;
 
-    vm.signOut = signOut;
+    vm.category = {
+      name: "",
+      icon: ""
+    };
+    vm.categories = [];
+    vm.newCategory = newCategory;
 
-    function signOut() {
-      authenticationService.clearUser();
-      $location.path('/');
+    function newCategory() {
+      var name = vm.category.name;
+      var icon = vm.category.icon;
+      categoryService.addCategory(name, icon).then(function() {
+        vm.category = {
+          name: "",
+          icon: ""
+        };
+        getCategories();
+      });
     }
+
+    function getCategories() {
+      categoryService.getCategories().then(function(dataFetched) {
+        vm.categories = dataFetched.categories;
+      });
+    }
+
+    getCategories();
   }
 })();

@@ -33,8 +33,30 @@
         </md-content>
       </md-tab>
       <md-tab label="People">
-        <md-content class="md-padding"></md-content>
-
+        <md-content class="md-padding">
+          <md-list flex>
+            <form ng-submit="ctrl.newPerson()" layout="column">
+              <md-input-container>
+                <label>Name</label>
+                <input ng-model="ctrl.person.name" type="text">
+              </md-input-container>
+            </form>
+            <md-list-item ng-repeat="person in ctrl.people" class="md-2-line">
+              <md-icon aria-label="face" >
+                face
+              </md-icon>
+              <div class="md-list-item-text">
+                <h3>
+                  {{ person.name }}
+                </h3>
+                <p>R$ 0,00</p>
+              </div>
+              <md-button class="md-secondary md-icon-button" ng-click="null" aria-label="remove">
+                <md-icon>edit</md-icon>
+              </md-button>
+            </md-list-item>
+          </md-list>
+        </md-content>
       </md-tab>
     </md-tabs>
   </md-content>

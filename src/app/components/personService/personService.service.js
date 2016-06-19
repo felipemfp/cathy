@@ -3,29 +3,24 @@
 
   angular
     .module('cathy')
-    .factory('categoryService', categoryService);
+    .factory('personService', personService);
 
   /** @ngInject */
-  function categoryService($rootScope, $http, $log, catherineAPI) {
+  function personService($rootScope, $http, $log, catherineAPI) {
     var apiHost = catherineAPI.apiHost;
 
     var service = {
-      addCategory: add,
-      updateCategory: update,
-      removeCategory: remove,
-      getCategories: get
+      addPerson: add,
+      updatePerson: update,
+      removePerson: remove,
+      getPeople: get
     };
 
     return service;
 
-    function add(name, icon) {
-      if (!icon) {
-        icon = 'label';
-      }
-
-      return $http.post(apiHost + '/api/categories/' + $rootScope.globals.currentUser.username + '/', {
-        name: name,
-        icon: icon
+    function add(name) {
+      return $http.post(apiHost + '/api/people/' + $rootScope.globals.currentUser.username + '/', {
+        name: name
       }).then(addComplete).catch(addFailed);
 
       function addComplete(response) {
@@ -39,10 +34,10 @@
 
     function get(id) {
       if (id) {
-        return $http.get(apiHost + '/api/categories/' + $rootScope.globals.currentUser.username + '/' + id + '/')
+        return $http.get(apiHost + '/api/people/' + $rootScope.globals.currentUser.username + '/' + id + '/')
           .then(getComplete).catch(getFailed);
       } else {
-        return $http.get(apiHost + '/api/categories/' + $rootScope.globals.currentUser.username + '/')
+        return $http.get(apiHost + '/api/people/' + $rootScope.globals.currentUser.username + '/')
           .then(getComplete).catch(getFailed);
       }
 
@@ -56,7 +51,7 @@
     }
 
     function remove(id) {
-      return $http.delete(apiHost + '/api/categories/' + $rootScope.globals.currentUser.username + '/' + id + '/')
+      return $http.delete(apiHost + '/api/people/' + $rootScope.globals.currentUser.username + '/' + id + '/')
         .then(removeComplete).catch(removeFailed);
 
       function removeComplete(response) {
@@ -73,13 +68,9 @@
       }
     }
 
-    function update(id, category) {
-      if (!category.icon) {
-        category.icon = 'label';
-      }
-
-      return $http.put(apiHost + '/api/categories/' + $rootScope.globals.currentUser.username + '/' + id + '/',
-          category)
+    function update(id, person) {
+      return $http.put(apiHost + '/api/people/' + $rootScope.globals.currentUser.username + '/' + id + '/',
+          person)
         .then(updateComplete).catch(updateFailed);
 
       function updateComplete(response) {

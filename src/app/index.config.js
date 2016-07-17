@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, $mdThemingProvider, cfpLoadingBarProvider) {
+  function config($logProvider, $mdThemingProvider, $locationProvider, cfpLoadingBarProvider) {
     // Enable log
     $logProvider.debugEnabled(true);
 
@@ -14,6 +14,7 @@
       .primaryPalette('purple')
       .accentPalette('green');
 
+    $locationProvider.html5Mode(true);
     cfpLoadingBarProvider.includeSpinner = false;
   }
 

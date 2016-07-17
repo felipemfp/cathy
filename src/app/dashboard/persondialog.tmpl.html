@@ -1,0 +1,19 @@
+<md-dialog aria-label="Person name">
+  <md-dialog-content>
+    <div  class="md-dialog-content">
+    <h2 class="md-title">What would you name this person?</h2>
+    <p>
+      {{personDialog.currentName}} is the current name.
+    </p>
+    <md-input-container>
+      <label>Name</label>
+      <input ng-model="personDialog.updateName" type="text">
+    </md-input-container>
+  </div>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="personDialog.update()" class="md-primary">Update</md-button>
+    <md-button ng-click="personDialog.remove()" class="">Remove</md-button>
+    <md-button ng-click="personDialog.cancel()" class="">Cancel</md-button>
+  </md-dialog-actions>
+</md-dialog>

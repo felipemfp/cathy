@@ -21,6 +21,7 @@
     vm.newPerson = newPerson;
     vm.newCategory = newCategory;
     vm.showCategoryDialog = showCategoryDialog;
+    vm.showPersonDialog = showPersonDialog;
 
     function newCategory() {
       var name = vm.category.name;
@@ -122,15 +123,68 @@
         });
     }
 
+    function showPersonDialog(person) {
+      $mdDialog.show({
+          controller: PersonDialogController,
+          controllerAs: 'personDialog',
+          templateUrl: 'app/dashboard/persondialog.tmpl.html',
+          parent: angular.element(document.body),
+          clickOutsideToClose: true,
+          locals: {
+            person: person
+          }
+        })
+        .then(function(updateName) {
+          if (updateName) {
+            person.name = updateName;
+            personService.updatePerson(person.person_id, person);
+          } else {
+            var confirm = $mdDialog.confirm()
+              .title('Would you like to delete this person?')
+              .textContent('All of the transactions with "' + person.name + '" person will be removed too.')
+              .ariaLabel('Delete Person')
+              .ok('Yes, sure')
+              .cancel('Cancel');
+            $mdDialog.show(confirm).then(function() {
+              personService.removePerson(person.person_id).then(function() {
+                $mdDialog.hide();
+                getPeople();
+              });
+            }, function() {
+              $mdDialog.cancel();
+            });
+          }
+        });
+    }
+
     getPeople();
     getCategories();
   }
 
-  function CategoryDialogController($log, $mdDialog, categoryService, category) {
+  function CategoryDialogController($log, $mdDialog, category) {
     var vm = this;
 
     vm.currentName = category.name;
     vm.updateName = category.name;
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    vm.update = function() {
+      $mdDialog.hide(vm.updateName);
+    };
+
+    vm.remove = function() {
+      $mdDialog.hide();
+    };
+  }
+
+  function PersonDialogController($log, $mdDialog, person) {
+    var vm = this;
+
+    vm.currentName = person.name;
+    vm.updateName = person.name;
 
     vm.cancel = function() {
       $mdDialog.cancel();

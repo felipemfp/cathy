@@ -1,4 +1,4 @@
-@import url(//fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic);
+@import 'https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i';
 
 @font-face {
   font-family: 'Material Icons';
@@ -10,6 +10,10 @@
        url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
        url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff) format('woff'),
        url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+html, body {
+  font-family: 'PT Sans', sans-serif;
 }
 
 .material-icons {
@@ -35,4 +39,8 @@
 
   /* Support for IE. */
   font-feature-settings: 'liga';
+}
+
+.heavy {
+  font-size: 3em;
 }

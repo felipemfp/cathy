@@ -12,7 +12,7 @@
                 <input ng-model="ctrl.category.name" type="text">
               </md-input-container>
             </form>
-            <md-list-item ng-repeat="category in ctrl.categories" class="md-2-line">
+            <md-list-item ng-repeat="category in ctrl.categories | filter: ctrl.category.name" class="md-2-line">
               <md-icon aria-label="{{category.icon}}" ng-if="category.icon">
                 {{category.icon}}
               </md-icon>
@@ -41,7 +41,7 @@
                 <input ng-model="ctrl.person.name" type="text">
               </md-input-container>
             </form>
-            <md-list-item ng-repeat="person in ctrl.people" class="md-2-line">
+            <md-list-item ng-repeat="person in ctrl.people | filter: ctrl.person.name" class="md-2-line">
               <md-icon aria-label="face" >
                 face
               </md-icon>
@@ -61,6 +61,6 @@
     </md-tabs>
   </md-content>
   <md-content flex="70">
-    <h1 ng-hide="vm.loading">Cath... wait for it!</h1>
+    <h2>Transactions</h2>
   </md-content>
 </main>

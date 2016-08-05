@@ -14,7 +14,7 @@
       .primaryPalette('purple')
       .accentPalette('green');
 
-    $locationProvider.html5Mode(true);
+    // $locationProvider.html5Mode(true);
     cfpLoadingBarProvider.includeSpinner = false;
   }
 

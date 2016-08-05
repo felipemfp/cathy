@@ -6,7 +6,7 @@
     .controller('DashboardController', DashboardController);
 
   /** @ngInject */
-  function DashboardController($log, $mdToast, $mdDialog, categoryService, personService) {
+  function DashboardController($log, $mdToast, $mdDialog, $document, categoryService, personService) {
     var vm = this;
 
     vm.person = {
@@ -94,7 +94,7 @@
           controller: CategoryDialogController,
           controllerAs: 'categoryDialog',
           templateUrl: 'app/dashboard/categorydialog.tmpl.html',
-          parent: angular.element(document.body),
+          parent: angular.element($document.body),
           clickOutsideToClose: true,
           locals: {
             category: category
@@ -128,7 +128,7 @@
           controller: PersonDialogController,
           controllerAs: 'personDialog',
           templateUrl: 'app/dashboard/persondialog.tmpl.html',
-          parent: angular.element(document.body),
+          parent: angular.element($document.body),
           clickOutsideToClose: true,
           locals: {
             person: person
